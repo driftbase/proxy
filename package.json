@@ -1,0 +1,21 @@
+{
+  "name": "caddy-proxy",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun --watch .",
+    "build": "bun build --compile --minify . --outfile app",
+    "start": "./app"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "consola": "^3.4.2",
+    "hono": "^4.7.11"
+  }
+}
