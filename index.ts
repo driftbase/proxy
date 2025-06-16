@@ -132,7 +132,7 @@ ${domain} {
 
         @404 status 404
         handle_response @404 {
-            respond "Custom 404 - Page not found" 404
+            respond "404 - The requested resource was not found on the server " 404
         }
 
         @5xx status 5xx
