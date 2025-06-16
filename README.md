@@ -1,15 +1,13 @@
-# caddy-proxy
+# Caddy Proxy
 
-To install dependencies:
+A proxy that allows your users to add custom domains.
 
-```bash
-bun install
-```
+### Setup cname record
 
-To run:
+Simply add an A record => "cname.mydomain.com" => ipv4
 
-```bash
-bun run index.ts
-```
+Then users can add an CNAME record => "test.mysite.com" => CNAME: cname.mydomain.com and BOOM!
 
-This project was created using `bun init` in bun v1.2.16. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+Also you can turn cloudflare proxy on so you dont expose your proxy ip and for DDOS protection!
+
+### Backup Caddyfile to S3

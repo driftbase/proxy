@@ -1,3 +1,3 @@
-api.postgres.space {
+<replace_with_your_domain> {
     reverse_proxy http://hono-api:4587
 }

@@ -3,8 +3,8 @@ services:
     container_name: caddy
     image: caddy:latest
     ports:
-      - "80:80"
-      - "443:443"
+      - '80:80'
+      - '443:443'
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
@@ -18,14 +18,30 @@ services:
     container_name: hono-api
     build: .
     ports:
-      - "4587:4587"
+      - '4587:4587'
     environment:
       - PORT=4587
+    env_file:
+      - .env
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./Caddyfile:/app/Caddyfile
     networks:
       - caddy-bridge
+  backup-cron:
+    image: alpine:latest
+    container_name: backup-cron
+    restart: unless-stopped
+    command: >
+      sh -c "
+      echo '0 2 * * * wget -qO- --post-data='' http://hono-api:4587/backup-caddyfile-to-s3' | crontab - &&
+      crond -f -l 2
+      "
+    networks:
+      - caddy-bridge
+    depends_on:
+      - hono-api
 
 networks:
   caddy-bridge:
